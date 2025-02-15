@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 const BulbControl = () => {
     const [status, setStatus] = useState<string>('OFF');
-    const apiUrl = 'http://192.168.43.204:5000'; 
+    const apiUrl = 'https://b508-105-112-179-174.ngrok-free.app/'; 
 
     // Fetch the current bulb status
     const fetchStatus = async () => {
