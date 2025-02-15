@@ -4,7 +4,7 @@ import { Lightbulb, LightbulbOff } from 'lucide-react';
 
 const BulbControl = () => {
     const [status, setStatus] = useState<string>('OFF');
-    const apiUrl = 'https://752d-102-91-105-211.ngrok-free.app'; 
+    const apiUrl = 'https://8891-102-91-105-211.ngrok-free.app'; 
 
     // Fetch the current bulb status
     const fetchStatus = async () => {
@@ -57,23 +57,23 @@ const BulbControl = () => {
                 <h1 className="text-2xl font-bold mb-4">Bulb Control</h1>
                 <p className="text-lg flex items-center justify-center space-x-2">
                     <span>Bulb is currently:</span>
-                    <strong className={status === 'ON' ? "text-green-500" : "text-red-500"}>
-                        {status}
+                    <strong className={status === 'ON' ? "text-red-500" : "text-green-500"}>
+                        {status === 'ON' ? 'OFF' : 'ON'}
                     </strong>
                 </p>
                 <div className="mt-6 flex justify-center">
                     {status === 'ON' ? (
-                        <Lightbulb className="w-16 h-16 text-yellow-400 animate-pulse" />
-                    ) : (
                         <LightbulbOff className="w-16 h-16 text-gray-500" />
+                    ) : (
+                        <Lightbulb className="w-16 h-16 text-yellow-400 animate-pulse" />
                     )}
                 </div>
                 <button
                     onClick={toggleBulb}
                     className={`mt-6 px-6 py-3 text-lg font-semibold rounded-lg transition-colors duration-300 
-                        ${status === 'ON' ? 'bg-red-500 hover:bg-red-700' : 'bg-green-500 hover:bg-green-700'}`}
+                        ${status === 'ON' ? 'bg-green-500 hover:bg-green-700' : 'bg-red-500 hover:bg-red-700'}`}
                 >
-                    {status === 'ON' ? 'Turn OFF' : 'Turn ON'}
+                    {status === 'ON' ? 'Turn ON' : 'Turn OFF'}
                 </button>
             </div>
             <footer className="mt-6 text-sm text-gray-400">
