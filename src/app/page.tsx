@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { Lightbulb, LightbulbOff } from 'lucide-react';
 
 const BulbControl = () => {
     const [status, setStatus] = useState<string>('OFF');
@@ -12,7 +13,7 @@ const BulbControl = () => {
                 method: "GET",
                 headers: { 
                     "Content-Type": "application/json",
-                    "ngrok-skip-browser-warning": "true" // ✅ Fix JSON error
+                    "ngrok-skip-browser-warning": "true"
                 }
             });
 
@@ -35,7 +36,7 @@ const BulbControl = () => {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
-                    "ngrok-skip-browser-warning": "true" // ✅ Fix JSON error
+                    "ngrok-skip-browser-warning": "true"
                 },
                 body: JSON.stringify({ state: newState }),
             });
@@ -51,50 +52,33 @@ const BulbControl = () => {
     }, []);
 
     return (
-        <div style={{ 
-            textAlign: 'center', 
-            marginTop: '50px', 
-            fontFamily: 'Arial, sans-serif',
-            padding: '20px',
-            borderRadius: '10px',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-            maxWidth: '400px',
-            margin: '0 auto',
-            backgroundColor: '#f9f9f9'
-        }}>
-            <h1 style={{ 
-                fontSize: '24px', 
-                color: '#333', 
-                marginBottom: '20px' 
-            }}>
-                Bulb Control
-            </h1>
-            <p style={{ 
-                fontSize: '18px', 
-                color: '#555', 
-                marginBottom: '20px' 
-            }}>
-                Bulb is currently: <strong style={{ 
-                    color: status === 'ON' ? '#28a745' : '#dc3545' 
-                }}>
-                    {status}
-                </strong>
-            </p>
-            <button
-                style={{ 
-                    padding: '15px 30px', 
-                    fontSize: '18px', 
-                    color: '#fff', 
-                    backgroundColor: status === 'ON' ? '#dc3545' : '#28a745', 
-                    border: 'none', 
-                    borderRadius: '5px', 
-                    cursor: 'pointer',
-                    transition: 'background-color 0.3s ease'
-                }}
-                onClick={toggleBulb}
-            >
-                {status === 'ON' ? 'Turn OFF' : 'Turn ON'}
-            </button>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-6">
+            <div className="bg-gray-800 shadow-lg rounded-xl p-6 text-center w-96">
+                <h1 className="text-2xl font-bold mb-4">Bulb Control</h1>
+                <p className="text-lg flex items-center justify-center space-x-2">
+                    <span>Bulb is currently:</span>
+                    <strong className={status === 'ON' ? "text-green-500" : "text-red-500"}>
+                        {status}
+                    </strong>
+                </p>
+                <div className="mt-6 flex justify-center">
+                    {status === 'ON' ? (
+                        <Lightbulb className="w-16 h-16 text-yellow-400 animate-pulse" />
+                    ) : (
+                        <LightbulbOff className="w-16 h-16 text-gray-500" />
+                    )}
+                </div>
+                <button
+                    onClick={toggleBulb}
+                    className={`mt-6 px-6 py-3 text-lg font-semibold rounded-lg transition-colors duration-300 
+                        ${status === 'ON' ? 'bg-red-500 hover:bg-red-700' : 'bg-green-500 hover:bg-green-700'}`}
+                >
+                    {status === 'ON' ? 'Turn OFF' : 'Turn ON'}
+                </button>
+            </div>
+            <footer className="mt-6 text-sm text-gray-400">
+                A project by: <span className="font-bold text-blue-400">AbdulAmmic 2025</span> | Imlux General Merchants
+            </footer>
         </div>
     );
 };
