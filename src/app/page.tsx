@@ -3,12 +3,23 @@ import { useState, useEffect } from 'react';
 
 const BulbControl = () => {
     const [status, setStatus] = useState<string>('OFF');
-    const apiUrl = 'https://b508-105-112-179-174.ngrok-free.app/'; 
+    const apiUrl = 'https://752d-102-91-105-211.ngrok-free.app'; 
 
     // Fetch the current bulb status
     const fetchStatus = async () => {
         try {
-            const response = await fetch(`${apiUrl}/status`);
+            const response = await fetch(`${apiUrl}/status`, {
+                method: "GET",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "ngrok-skip-browser-warning": "true" // ✅ Fix JSON error
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
             const data = await response.json();
             setStatus(data.status);
         } catch (error) {
@@ -22,7 +33,10 @@ const BulbControl = () => {
         try {
             await fetch(`${apiUrl}/control`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    "ngrok-skip-browser-warning": "true" // ✅ Fix JSON error
+                },
                 body: JSON.stringify({ state: newState }),
             });
             fetchStatus(); // Update status after control
