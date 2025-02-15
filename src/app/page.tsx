@@ -6,7 +6,6 @@ const BulbControl = () => {
     const [status, setStatus] = useState<string>('OFF');
     const apiUrl = 'https://8891-102-91-105-211.ngrok-free.app'; 
 
-    // Fetch the current bulb status
     const fetchStatus = async () => {
         try {
             const response = await fetch(`${apiUrl}/status`, {
@@ -28,7 +27,6 @@ const BulbControl = () => {
         }
     };
 
-    // Toggle the bulb state
     const toggleBulb = async () => {
         const newState = status === 'ON' ? 'off' : 'on';
         try {
@@ -40,13 +38,12 @@ const BulbControl = () => {
                 },
                 body: JSON.stringify({ state: newState }),
             });
-            fetchStatus(); // Update status after control
+            fetchStatus(); 
         } catch (error) {
             console.error('Error controlling bulb:', error);
         }
     };
 
-    // Fetch initial status on component mount
     useEffect(() => {
         fetchStatus();
     }, []);
