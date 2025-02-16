@@ -2,9 +2,11 @@
 import { useState, useEffect } from 'react';
 import { Lightbulb, LightbulbOff } from 'lucide-react';
 
+
+
 const BulbControl = () => {
     const [status, setStatus] = useState<string>('OFF');
-    const apiUrl = 'https://973c-102-91-105-211.ngrok-free.app'; 
+    const apiUrl = 'https://3bd3-102-91-104-168.ngrok-free.app; 
 
     const fetchStatus = async () => {
         try {
@@ -18,6 +20,7 @@ const BulbControl = () => {
 
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
+            
             }
 
             const data = await response.json();
