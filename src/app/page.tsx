@@ -6,7 +6,7 @@ import { Lightbulb, LightbulbOff } from 'lucide-react';
 
 const BulbControl = () => {
     const [status, setStatus] = useState<string>('OFF');
-    const apiUrl = ' https://8786-102-91-104-168.ngrok-free.app';
+    const apiUrl = 'https://1167-102-91-77-111.ngrok-free.app';
 
     const fetchStatus = async () => {
         try {
